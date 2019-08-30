@@ -31,6 +31,13 @@ public class Aula_pratica_1
         try
         {
            this.escolha_inicial = ler_teclado.nextInt();
+           while(this.escolha_inicial < 0 || this.escolha_inicial > 3)
+               
+            {
+                System.out.println("Invalido, tente novamente");
+                this.pegar_inicio();
+            }
+        
         }
         catch(Exception e)
         {

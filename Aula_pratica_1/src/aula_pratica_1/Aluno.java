@@ -17,7 +17,7 @@ public class Aluno
 {
     protected String nome;
     protected String nome_rua;
-    protected String numero_rua;
+    protected int numero_rua;
     protected String cidade;
     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
     protected String data_nascimento;
@@ -47,7 +47,6 @@ public class Aluno
                 System.out.println("Invalido, tente novamente");
                 this.set_num_USP();
             }
-            
         }
         catch(Exception e)
         {
@@ -61,33 +60,51 @@ public class Aluno
         System.out.println("Digite a data de nascimento no formato: dd/MM/yyyy ");
         //ler_teclado.nextLine();
         try
-        {
-            //this.data_nascimento = "000000";
-            //ler_teclado.nextLine();
+        {            
             this.data_nascimento = ler_teclado.nextLine();
-            System.out.println(String.valueOf(this.data_nascimento.charAt(2)) == "/");
-            if(String.valueOf(this.data_nascimento.charAt(2)) == "/" 
-                    && String.valueOf(this.data_nascimento.charAt(5)) == "/")
+            if(this.data_nascimento.length() < 10 && 
+               this.data_nascimento.length() > 10)
             {
-                Date date = format.parse(this.data_nascimento);
-            }
-            else
-            {   
                 System.out.println("Invalido, tente novamente");
                 this.set_data_nascimento();
+            }
+            else
+            {
+                if(Integer.parseInt(this.data_nascimento.substring(0,2)) < 1 || 
+                   Integer.parseInt(this.data_nascimento.substring(0,2)) > 31)
+                {
+                    System.out.println("Invalido, tente novamente");
+                    this.set_data_nascimento();
+                }
+                else
+                {
+                    if(Integer.parseInt(this.data_nascimento.substring(3,5)) < 1 || 
+                       Integer.parseInt(this.data_nascimento.substring(3,5)) > 12) 
+                    { 
+                        System.out.println("Invalido, tente novamente");
+                        this.set_data_nascimento(); 
+                    }
+                    else
+                    {
+                        if(this.data_nascimento.substring(2,3).equals("/")
+                                && this.data_nascimento.substring(5,6).equals("/"))
+                        {
+                            Date date = format.parse(this.data_nascimento);
+                        }
+                        else
+                        {   
+                            System.out.println("Invalido, tente novamente");
+                            this.set_data_nascimento();
+                        }
+                    }
+                }
             }
         }
         catch(Exception e)
         {
             System.out.println("Invalido, tente novamente");
-            System.out.print("");
             this.set_data_nascimento();
         }
-        //if((this.data_nascimento.length() == 0) || (this.data_nascimento.length() != 10))
-        //{
-        //    System.out.println("Invalido, tente novamente");
-        //    this.set_data_nascimento();
-        //}
     }
     
     
@@ -95,7 +112,7 @@ public class Aluno
     {
         System.out.println("Digite o Nome da Rua: ");
         this.nome_rua = ler_teclado.nextLine();
-        if(this.nome_rua.length() == 0)
+        if(this.nome_rua.length() == 0 || this.nome_rua.length() < 7)
         {
             System.out.println("Invalido, tente novamente");
             this.set_name_street();
@@ -104,18 +121,29 @@ public class Aluno
     protected void set_num_street()
     {
         System.out.println("Digite o Numero da Rua: ");
-        this.numero_rua = ler_teclado.nextLine();
-        if(this.numero_rua.length() == 0)
+        this.numero_rua = ler_teclado.nextInt();
+        try
+        {
+            if(String.valueOf(this.numero_rua).length() <= 0 ||
+               String.valueOf(this.numero_rua).length() > 4)
+            {
+                System.out.println("Invalido, tente novamente");
+                this.set_num_street();
+            }
+        }
+        catch(Exception e)
         {
             System.out.println("Invalido, tente novamente");
             this.set_num_street();
         }
+         
+        
     }
     protected void set_city()
     {
         System.out.println("Digite a Cidade: ");
         this.cidade = ler_teclado.nextLine();
-        if(this.cidade.length() == 0)
+        if(this.cidade.length() <= 0 || this.cidade.length() >= 40)
         {
             System.out.println("Invalido, tente novamente");
             this.set_city();
@@ -126,7 +154,7 @@ public class Aluno
         this.set_name();
         //ler_teclado.nextLine();
         this.set_num_USP();
-        //ler_teclado.nextLine();
+        ler_teclado.nextLine();
         this.set_data_nascimento();
         this.set_name_street();
         //ler_teclado.nextLine();
