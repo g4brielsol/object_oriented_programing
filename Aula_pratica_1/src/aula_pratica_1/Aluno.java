@@ -42,7 +42,8 @@ public class Aluno
         {
             this.numero_usp = ler_teclado.nextInt();
             if((String.valueOf(this.numero_usp).length() <= 0) || 
-                    (String.valueOf(this.numero_usp).length() > 7))
+                    (String.valueOf(this.numero_usp).length() > 7) ||
+                    (this.numero_usp <= 0))
             {
                 System.out.println("Invalido, tente novamente");
                 this.set_num_USP();
@@ -62,8 +63,7 @@ public class Aluno
         try
         {            
             this.data_nascimento = ler_teclado.nextLine();
-            if(this.data_nascimento.length() < 10 && 
-               this.data_nascimento.length() > 10)
+            if(this.data_nascimento.length() != 10)
             {
                 System.out.println("Invalido, tente novamente");
                 this.set_data_nascimento();
@@ -121,18 +121,20 @@ public class Aluno
     protected void set_num_street()
     {
         System.out.println("Digite o Numero da Rua: ");
-        this.numero_rua = ler_teclado.nextInt();
         try
         {
+            this.numero_rua = ler_teclado.nextInt();
             if(String.valueOf(this.numero_rua).length() <= 0 ||
                String.valueOf(this.numero_rua).length() > 4)
             {
                 System.out.println("Invalido, tente novamente");
+                //ler_teclado.nextInt();
                 this.set_num_street();
             }
         }
         catch(Exception e)
         {
+            ler_teclado.nextLine();
             System.out.println("Invalido, tente novamente");
             this.set_num_street();
         }
@@ -152,16 +154,12 @@ public class Aluno
     protected void cadastrar_aluno()
     {
         this.set_name();
-        //ler_teclado.nextLine();
         this.set_num_USP();
         ler_teclado.nextLine();
         this.set_data_nascimento();
         this.set_name_street();
-        //ler_teclado.nextLine();
         this.set_num_street();
-        //ler_teclado.nextLine();
         this.set_city();
-        //ler_teclado.nextLine();
     }
 
     
