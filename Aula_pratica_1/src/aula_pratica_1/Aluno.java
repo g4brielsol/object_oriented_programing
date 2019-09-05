@@ -24,7 +24,9 @@ public class Aluno
     protected String cidade;
     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
     protected String data_nascimento;
+    protected String data_emprestimo;
     protected int numero_usp;
+    protected int numero_usp_emprestimo;
     protected boolean debito_biblioteca = false;
     Scanner ler_teclado = new Scanner (System.in);
     
@@ -62,6 +64,30 @@ public class Aluno
         //ler_teclado.nextLine();
         return(this.numero_usp);
     }
+    protected int set_num_USP_emprestimo()
+    {
+        System.out.print("Digite o Numero USP de quem quer fazer o emprestimo: \n");
+        try
+        {
+            this.numero_usp_emprestimo = ler_teclado.nextInt();
+            if((String.valueOf(this.numero_usp_emprestimo).length() <= 0) || 
+                    (String.valueOf(this.numero_usp_emprestimo).length() > 7) ||
+                    (this.numero_usp_emprestimo <= 0))
+            {
+                System.out.println("Invalido, tente novamente");
+                this.set_num_USP_emprestimo();
+            }
+        }
+        catch(Exception e)
+        {
+            ler_teclado.nextLine();
+            System.out.println("Invalido, tente novamente");
+            this.set_num_USP_emprestimo();
+        }
+        //ler_teclado.nextLine();
+        return(this.numero_usp_emprestimo);
+    }
+    
         protected String set_data_nascimento()
     {
         //ler_teclado.nextLine();

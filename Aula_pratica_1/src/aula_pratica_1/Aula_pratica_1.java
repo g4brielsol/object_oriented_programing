@@ -73,6 +73,7 @@ public class Aula_pratica_1
         }
         return(this.escolha_final);
     }
+
         
     
     public static void main(String[] args) 
@@ -95,6 +96,7 @@ public class Aula_pratica_1
         Scanner ler_teclado = new Scanner(System.in);
         Aula_pratica_1 comeco = new Aula_pratica_1(); 
         int decisao = 0;
+        int indice = -1;
         //comeco.escolha_inicial = -1;
         //while(String.valueOf(decisao).equals("0"))
         while(decisao == 0)
@@ -142,9 +144,34 @@ public class Aula_pratica_1
                 }
                 else
                 {
-                    ;
+                    if(comeco.escolha_inicial == 3)
+                    {
+                        Aluno emprestimo = new Aluno();
+                        emprestimo.numero_usp = emprestimo.set_num_USP_emprestimo();
+                        for(int i = 0; i < array_n_usp.size(); i++)
+                        {
+                            if(emprestimo.numero_usp == array_n_usp.get(i))
+                            {
+                                indice = i;
+                            }
+                            else
+                            {
+                                System.out.println("Pessoa nao encontrada, tente novamente");
+                            }
+                        }
+                        if(indice >= 0)
+                        {
+                            if(array_debito.get(indice) == true)
+                            {
+                                ;
+                            }
+                        }
+                        
+                    }
+                                    
                 }
             }
+            
             decisao = comeco.fechar_programa();
             if(decisao == 1)
             {
