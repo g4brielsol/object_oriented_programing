@@ -7,6 +7,7 @@ package aula_pratica_1;
 import java.util.Scanner;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.ArrayList;
 import java.text.ParseException;
 import java.io.*;
 
@@ -21,6 +22,9 @@ public class Midia {
     protected String editora;
     protected String localizacao;
     protected String secao;
+    protected String buscar_titulo;
+    protected int conclusao;
+    protected int indice = -1;
     protected boolean disponivel_emprestimo = true;
     Scanner ler_teclado = new Scanner (System.in);
     
@@ -93,5 +97,64 @@ public class Midia {
             this.set_secao();
         } 
         return(this.secao);
-    }   
+    }
+    protected String buscar_titulo_autor()
+    {
+        System.out.println("Digite o titulo ou o autor. Ou digite parte do titulo ou do autor a ser encontrado: ");
+        this.buscar_titulo = ler_teclado.nextLine();
+        if(this.buscar_titulo.length() <= 1)
+        {
+            System.out.println("Invalido, tente novamente");
+            this.buscar_titulo_autor();
+        } 
+        return(this.buscar_titulo);
+    }
+    protected int buscar_catalogo(ArrayList<String> array, ArrayList<String> array_1, String digito_usuario)
+    {
+        int i;
+        for(i = 0; i < array.size(); i++)
+        {
+            if(array.get(i).contains(digito_usuario))
+            {
+                indice = i;
+                return(i);
+            }
+        }
+        if(indice < 0)
+        {
+            for(i = 0; i < array_1.size(); i++)
+            {
+                //System.out.println("autor" + array.get(i));
+                //System.out.println("contem string " + array.get(i).contains(digito_usuario));
+                if(array_1.get(i).contains(digito_usuario))
+                {
+                    return(i);
+                }                
+            }
+        }
+        return(indice);
+    }
+    protected int devolver()
+    {
+        System.out.print("Digite 1 para concluir a devolucao,\n"
+                + "Digite 0 para nao concluir\n");
+        try
+        {
+            this.conclusao = ler_teclado.nextInt();
+            while(this.conclusao < 0 ||
+                    this.conclusao > 1)
+
+             {
+                 System.out.println("Invalido, tente novamente");
+                 this.devolver();
+             }
+        }
+        catch(Exception e)
+        {
+            System.out.println("Invalido, tente novamente");
+            ler_teclado.nextLine();
+            this.devolver();
+        }
+        return(this.conclusao);
+    }
 }
