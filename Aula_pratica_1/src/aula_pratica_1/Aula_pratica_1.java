@@ -36,10 +36,12 @@ public class Aula_pratica_1
         System.out.println("Digite 1 para Cadastrar um Usuario,\n"
                           + "Digite 2 para Cadastrar uma Midia ou\n"
                           + "Digite 3 para Busca ou Emprestimo: ");
+        //ler_teclado.nextLine();
         try
         {
-           this.escolha_inicial = ler_teclado.nextInt();
-           while(this.escolha_inicial < 0 || this.escolha_inicial > 3)
+           String ler = ler_teclado.nextLine();
+           this.escolha_inicial = Integer.parseInt(ler);
+           while(this.escolha_inicial < 1 || this.escolha_inicial > 3)
                
             {
                 System.out.println("Invalido, tente novamente");
@@ -50,7 +52,7 @@ public class Aula_pratica_1
         catch(Exception e)
         {
             System.out.println("Invalido, tente novamente");
-            ler_teclado.nextLine();
+            //ler_teclado.nextLine();
             this.pegar_inicio();
         }
     }
@@ -61,7 +63,8 @@ public class Aula_pratica_1
                 + "Digite 1 para devolucao de livros\n");
         try
         {
-            this.escolha_emprestimo_devolucao = ler_teclado.nextInt();
+            String ler = ler_teclado.nextLine();
+            this.escolha_emprestimo_devolucao = Integer.parseInt(ler);
             while(this.escolha_emprestimo_devolucao < 0 ||
                     this.escolha_emprestimo_devolucao > 1)
 
@@ -73,7 +76,7 @@ public class Aula_pratica_1
         catch(Exception e)
         {
             System.out.println("Invalido, tente novamente");
-            ler_teclado.nextLine();
+            //ler_teclado.nextLine();
             this.emprestar_devolver();
         }
         return(this.escolha_emprestimo_devolucao);
@@ -85,7 +88,8 @@ public class Aula_pratica_1
                 + "Senao tecle 0 para fazer outra operacao\n");
         try
         {
-            this.escolha_final = ler_teclado.nextInt();
+            String ler = ler_teclado.nextLine();
+            this.escolha_final = Integer.parseInt(ler);
             while(this.escolha_final < 0 || this.escolha_final > 1)
 
              {
@@ -96,14 +100,11 @@ public class Aula_pratica_1
         catch(Exception e)
         {
             System.out.println("Invalido, tente novamente");
-            ler_teclado.nextLine();
+            //ler_teclado.nextLine();
             this.fechar_programa();
         }
         return(this.escolha_final);
     }
-
-        
-    
     public static void main(String[] args) 
     {
         ArrayList<String> array_nome = new ArrayList<String>();
@@ -136,21 +137,20 @@ public class Aula_pratica_1
             comeco.pegar_inicio();
             if(comeco.escolha_inicial == 1)
             {
-                Aluno funcao = new Aluno();
                 Aluno cadastro = new Aluno();
                 //aluno.cadastrar_aluno();
-                cadastro.nome = funcao.set_name();
+                cadastro.nome = cadastro.set_name();
                 array_nome.add(cadastro.nome);
-                cadastro.numero_usp = funcao.set_num_USP();
+                cadastro.numero_usp = cadastro.set_num_USP("Digite o Numero USP: ");
                 array_n_usp.add(cadastro.numero_usp);
-                cadastro.data_nascimento = funcao.set_data_nascimento();
+                cadastro.data_nascimento = cadastro.set_data("Digite a data de nascimento no formato: dd/MM/yyyy ");
                 array_data_nascimento.add(cadastro.data_nascimento);
-                cadastro.nome_rua = funcao.set_name_street();
+                cadastro.nome_rua = cadastro.set_name_street();
                 array_nome_rua.add(cadastro.nome_rua);
-                cadastro.numero_rua = funcao.set_num_street();
+                cadastro.numero_rua = cadastro.set_num_street();
                 array_numero_rua.add(cadastro.numero_rua);
                 cadastro.chave = -1;
-                cadastro.cidade = funcao.set_city();
+                cadastro.cidade = cadastro.set_city();
                 array_cidade.add(cadastro.cidade);
                 array_debito.add(cadastro.debito_biblioteca);
                 array_emprestimo.add(null);
@@ -161,19 +161,18 @@ public class Aula_pratica_1
             {
                 if(comeco.escolha_inicial == 2)
                 {
-                    Midia funcao_midia = new Midia();
                     Midia cadastro = new Midia();
-                    cadastro.titulo = funcao_midia.set_titulo();
+                    cadastro.titulo = cadastro.set_feature("Digite o Titulo: ");
                     array_titulo.add(cadastro.titulo);
-                    cadastro.autor = funcao_midia.set_autor();
+                    cadastro.autor = cadastro.set_feature("Digite o Autor: ");
                     array_autor.add(cadastro.autor);
-                    cadastro.tipo_midia = funcao_midia.set_tipo_midia();
+                    cadastro.tipo_midia = cadastro.set_feature("Digite o Tipo de Midia: ");
                     array_tipo_midia.add(cadastro.tipo_midia);
-                    cadastro.editora = funcao_midia.set_editora();
+                    cadastro.editora = cadastro.set_feature("Digite a Editora: ");
                     array_editora.add(cadastro.editora);
-                    cadastro.localizacao = funcao_midia.set_localizacao();
+                    cadastro.localizacao = cadastro.set_feature("Digite a Localizacao: ");
                     array_localizacao.add(cadastro.localizacao);
-                    cadastro.secao = funcao_midia.set_secao();
+                    cadastro.secao = cadastro.set_feature("Digite a Secao: ");
                     array_secao.add(cadastro.secao);
                     array_disponivel.add(cadastro.disponivel_emprestimo);
                 }
@@ -184,27 +183,14 @@ public class Aula_pratica_1
                         Aula_pratica_1 biblioteca = new Aula_pratica_1();
                         decisao_terceiro_menu = biblioteca.emprestar_devolver();
                         Aluno emprestimo_aluno = new Aluno();
-                        emprestimo_aluno.data_atual = emprestimo_aluno.set_data_atual();
-                        emprestimo_aluno.numero_usp = emprestimo_aluno.set_num_USP_emprestimo();
-                        if(decisao_terceiro_menu == 0)
+                        emprestimo_aluno.data_atual = emprestimo_aluno.set_data("Digite a data atual no formato: dd/MM/yyyy ");
+
+                        if(decisao_terceiro_menu == 0) // emprestimo
                         {
-                            indice_pessoa = -1;
-                            for(int i = 0; i < array_n_usp.size(); i++)
-                            {
-                                if(emprestimo_aluno.numero_usp == array_n_usp.get(i))
-                                {
-                                    indice_pessoa = i;
-                                    System.out.println(array_nome.get(indice_pessoa) +
-                                                       " encontrado!");
-                                }
-                                else
-                                {
-                                    System.out.println("Pessoa nao encontrada, tente novamente");
-                                }
-                            }
+                            indice_pessoa = emprestimo_aluno.buscar_num_USP(array_n_usp);
                             if(indice_pessoa >= 0)
                             {
-                                if(array_debito.get(indice_pessoa) == true)
+                                if(array_debito.get(indice_pessoa) == true) // se a pessoa tem dividas
                                 {
                                     try
                                     {
@@ -233,7 +219,7 @@ public class Aula_pratica_1
                                         ;
                                     }
                                 }
-                                else
+                                else // se a pessoa nao tem dividas
                                 {
                                     Midia emprestar_livro = new Midia();
                                     int indice_livro;
@@ -241,18 +227,18 @@ public class Aula_pratica_1
                                     indice_livro = emprestar_livro.buscar_catalogo(array_titulo, array_autor, 
                                                                                    emprestar_livro.buscar_titulo);
                                     //System.out.println("Digito usuario " + emprestar_livro.buscar_titulo);
-                                    if(indice_livro == -1)
+                                    if(indice_livro == -1) // livro nao encontrado
                                     {
                                         System.out.println("Livro nao encontrado!!");
 
                                     }
-                                    else
+                                    else // livro encontrado
                                     {
                                         System.out.println("Livro Encontrado: " + array_titulo.get(indice_livro));
                                         if(array_disponivel.get(indice_livro) == true)
                                         {
                                             System.out.println("O livro esta disponivel para emprestimo!");
-                                            emprestimo_aluno.data_emprestimo = emprestimo_aluno.set_data_emprestimo();
+                                            emprestimo_aluno.data_emprestimo = emprestimo_aluno.set_data("Digite a data de emprestimo no formato: dd/MM/yyyy ");
                                             Calendar c = Calendar.getInstance();
                                             try
                                             {    
@@ -262,7 +248,7 @@ public class Aula_pratica_1
                                             {
                                                 ;
                                             }
-                                            c.add(Calendar.DATE, 7);  // number of days to add
+                                            c.add(Calendar.DATE, 7);  // adiciona 7 dias a data de emprestimo
                                             emprestimo_aluno.data_devolucao = data.format(c.getTime()); 
                                             array_emprestimo.set(indice_pessoa, emprestimo_aluno.data_emprestimo);
                                             array_devolucao.set(indice_pessoa, emprestimo_aluno.data_devolucao);
@@ -272,43 +258,32 @@ public class Aula_pratica_1
                                             System.out.println("Emprestimo cadastrado com sucesso!");
 
                                         }
-                                        else
+                                        else // livro alugado por outra pessoa
                                         {
                                             System.out.println("O livro nao esta disponivel para emprestimo");
                                         }
                                     }
                                 }
-                            }    
-                        }
-                        else
-                        {
-                            for(int i = 0; i < array_n_usp.size(); i++)
-                            {
-                                if(emprestimo_aluno.numero_usp == array_n_usp.get(i))
-                                {
-                                    indice_pessoa = i;
-                                    System.out.println(array_nome.get(indice_pessoa) +
-                                                       " encontrado!");
-                                }
-                                else
-                                {
-                                    System.out.println("Pessoa nao encontrada, tente novamente");
-                                }
                             }
-                            if(array_debito.get(indice_pessoa) == true)
+                        }
+                        else // devolucao de midias
+                        {
+                            indice_pessoa = emprestimo_aluno.buscar_num_USP(array_n_usp);
+                            if(array_debito.get(indice_pessoa) == true) // se a pessoa tem debitos
                             {
                                 try
                                 {
                                     Date inicio = data.parse(emprestimo_aluno.data_atual);
                                     Date fim = data.parse(array_devolucao.get(indice_pessoa));
                                     long diferenca = fim.getTime() - inicio.getTime();
-                                    if(diferenca >= 0)
+                                    if(diferenca >= 0) // se a pessoa ainda esta no prazo
                                     {
                                         System.out.println(array_nome.get(indice_pessoa) +
                                             " pode devolver a midia " + array_livro.get(indice_pessoa) +
                                             " sem multa ate a data " + data.format(fim));
                                         Midia emprestar_livro = new Midia();
-                                        emprestar_livro.conclusao = emprestar_livro.devolver();
+                                        emprestar_livro.conclusao = emprestar_livro.devolver("Digite 1 para concluir a devolucao,\n",
+                                                                               "Digite 0 para nao concluir\n");
                                         if(emprestar_livro.conclusao == 1)
                                         {    
                                             int indice_livro;
@@ -327,7 +302,7 @@ public class Aula_pratica_1
                                             System.out.println("Devolucao nao concluida!");
                                         }
                                     }
-                                    else
+                                    else // pessoa deve pagar multas com a biblioteca
                                     {
                                         System.out.println(array_nome.get(indice_pessoa) +
                                                 " deveria ter devolvido a midia " +
@@ -337,7 +312,9 @@ public class Aula_pratica_1
                                                 ", esta atrasado em " + ((-1) * diferenca/86400000) + 
                                                 " dia(s)!");
                                         Midia emprestar_livro = new Midia();
-                                        emprestar_livro.conclusao = emprestar_livro.devolver();
+                                        emprestar_livro.conclusao = emprestar_livro.devolver("Digite 1 se a pessoa "
+                                                + "pagou a multa e concluiu a devolucao,\n", "Digite 0 se a pessoa "
+                                                        + "nao pagou a multa e nao concluiu a devolucao");
                                         if(emprestar_livro.conclusao == 1)
                                         {    
                                             int indice_livro;

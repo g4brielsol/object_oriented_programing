@@ -28,76 +28,18 @@ public class Midia {
     protected boolean disponivel_emprestimo = true;
     Scanner ler_teclado = new Scanner (System.in);
     
-    protected String set_titulo()
+    protected String set_feature(String frase)
     {
-        System.out.println("Digite o Titulo: ");
+        System.out.println(frase);
         this.titulo = ler_teclado.nextLine();
         if(this.titulo.length() <= 1)
         {
             System.out.println("Invalido, tente novamente");
-            this.set_titulo();
+            this.set_feature(frase);
         }
         return(this.titulo);
-    }
-    
-    protected String set_autor()
-    {
-        System.out.println("Digite o Autor: ");
-        this.autor = ler_teclado.nextLine();
-        if(this.autor.length() <= 1)
-        {
-            System.out.println("Invalido, tente novamente");
-            this.set_autor();
-        }    
-        return(this.autor);
-    }
-
-    protected String set_tipo_midia()
-    {
-        System.out.println("Digite o Tipo de Midia: ");
-        this.tipo_midia = ler_teclado.nextLine();
-        if(this.tipo_midia.length() <= 1)
-        {
-            System.out.println("Invalido, tente novamente");
-            this.set_tipo_midia();
-        }
-        return(this.tipo_midia);
-    }
-    
-    protected String set_editora()
-    {
-        System.out.println("Digite a Editora: ");
-        this.editora = ler_teclado.nextLine();
-        if (this.editora.length() <= 1) {
-            System.out.println("Invalido, tente novamente");
-            this.set_editora();
-        }
-        return(this.editora);
     }    
     
-    protected String set_localizacao()
-    {
-        System.out.println("Digite a Localizacao: ");
-        this.localizacao = ler_teclado.nextLine();
-        if(this.localizacao.length() <= 1)
-        {
-            System.out.println("Invalido, tente novamente");
-            this.set_localizacao();
-        }
-        return(this.localizacao);
-    }
-    
-    protected String set_secao()
-    {
-        System.out.println("Digite a Secao: ");
-        this.secao = ler_teclado.nextLine();
-        if(this.secao.length() <= 1)
-        {
-            System.out.println("Invalido, tente novamente");
-            this.set_secao();
-        } 
-        return(this.secao);
-    }
     protected String buscar_titulo_autor()
     {
         System.out.println("Digite o titulo ou o autor. Ou digite parte do titulo ou do autor a ser encontrado: ");
@@ -114,7 +56,7 @@ public class Midia {
         int i;
         for(i = 0; i < array.size(); i++)
         {
-            if(array.get(i).contains(digito_usuario))
+            if(array.get(i).toLowerCase().contains(digito_usuario.toLowerCase()))
             {
                 indice = i;
                 return(i);
@@ -126,7 +68,7 @@ public class Midia {
             {
                 //System.out.println("autor" + array.get(i));
                 //System.out.println("contem string " + array.get(i).contains(digito_usuario));
-                if(array_1.get(i).contains(digito_usuario))
+                if(array_1.get(i).toLowerCase().contains(digito_usuario.toLowerCase()))
                 {
                     return(i);
                 }                
@@ -134,10 +76,10 @@ public class Midia {
         }
         return(indice);
     }
-    protected int devolver()
+    protected int devolver(String frase_1, String frase_2)
     {
-        System.out.print("Digite 1 para concluir a devolucao,\n"
-                + "Digite 0 para nao concluir\n");
+        System.out.print(frase_1
+                + frase_2);
         try
         {
             this.conclusao = ler_teclado.nextInt();
@@ -146,14 +88,14 @@ public class Midia {
 
              {
                  System.out.println("Invalido, tente novamente");
-                 this.devolver();
+                 this.devolver(frase_1, frase_2);
              }
         }
         catch(Exception e)
         {
             System.out.println("Invalido, tente novamente");
             ler_teclado.nextLine();
-            this.devolver();
+            this.devolver(frase_1, frase_2);
         }
         return(this.conclusao);
     }

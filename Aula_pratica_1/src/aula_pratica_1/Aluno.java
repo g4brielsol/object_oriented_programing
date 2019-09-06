@@ -18,13 +18,11 @@ public class Aluno
 {
     protected String nome;
     protected int chave = -1;
-    protected int chave_1 = -1;
-    protected int chave_2 = -1;
-    protected int chave_3 = -1;
     protected String nome_rua;
     protected int numero_rua;
     protected String cidade;
     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+    protected String data;
     protected String data_nascimento;
     protected String data_emprestimo;
     protected String data_devolucao;
@@ -32,7 +30,7 @@ public class Aluno
     protected int numero_usp;
     protected int numero_usp_emprestimo;
     protected boolean debito_biblioteca = false;
-    Scanner ler_teclado = new Scanner (System.in);
+    Scanner ler_teclado = new Scanner(System.in);
     
     protected String set_name()
     {
@@ -45,97 +43,91 @@ public class Aluno
         }    
         return (this.nome);   
     }
-    protected int set_num_USP()
+    protected int set_num_USP(String frase)
     {
-        System.out.print("Digite o Numero USP: \n");
+        System.out.println(frase);
         try
         {
-            this.numero_usp = ler_teclado.nextInt();
-            if((String.valueOf(this.numero_usp).length() <= 0) || 
+            String receiver = ler_teclado.nextLine();
+            this.numero_usp = Integer.parseInt(receiver);
+            if((String.valueOf(this.numero_usp).length() < 1) || 
                     (String.valueOf(this.numero_usp).length() > 7) ||
-                    (this.numero_usp <= 0))
+                    (this.numero_usp <= 0)
+                    )
             {
+                ler_teclado.nextLine();
                 System.out.println("Invalido, tente novamente");
-                this.set_num_USP();
+                this.set_num_USP(frase);
             }
         }
         catch(Exception e)
         {
-            ler_teclado.nextLine();
             System.out.println("Invalido, tente novamente");
-            this.set_num_USP();
+            this.set_num_USP(frase);
         }
-        //ler_teclado.nextLine();
         return(this.numero_usp);
     }
-    protected int set_num_USP_emprestimo()
+    protected int buscar_num_USP(ArrayList<Integer> array)
     {
-        System.out.print("Digite o Numero USP de quem quer fazer o emprestimo: \n");
-        try
+        int n_usp = this.set_num_USP("Digite o Numero USP de quem quer fazer o emprestimo: ");
+        for(int i = 0; i < array.size(); i++)
         {
-            this.numero_usp_emprestimo = ler_teclado.nextInt();
-            if((String.valueOf(this.numero_usp_emprestimo).length() <= 0) || 
-                    (String.valueOf(this.numero_usp_emprestimo).length() > 7) ||
-                    (this.numero_usp_emprestimo <= 0))
+            if(n_usp == array.get(i))
             {
-                System.out.println("Invalido, tente novamente");
-                this.set_num_USP_emprestimo();
+                System.out.println(array.get(i) +
+                                   " encontrado!");
+                return(i);
             }
         }
-        catch(Exception e)
-        {
-            ler_teclado.nextLine();
-            System.out.println("Invalido, tente novamente");
-            this.set_num_USP_emprestimo();
-        }
-        //ler_teclado.nextLine();
-        return(this.numero_usp_emprestimo);
+        System.out.println("Pessoa nao encontrada, tente novamente");
+        return(-1);
     }
     
-        protected String set_data_nascimento()
+    
+    protected String set_data(String frase)
     {
         //ler_teclado.nextLine();
-        System.out.println("Digite a data de nascimento no formato: dd/MM/yyyy ");
+        System.out.println(frase);
         try
-        {   
-            if(this.chave < 0)
-            {
-                ler_teclado.nextLine();
-                this.chave = 1;
-            }
-            this.data_nascimento = ler_teclado.nextLine();
-            if(this.data_nascimento.length() != 10)
+        {
+            this.data = ler_teclado.nextLine();
+            if(this.data.length() != 10)
             {
                 System.out.println("Invalido, tente novamente");
-                this.set_data_nascimento();
+                this.set_data(frase);
             }
             else
             {
-                if(Integer.parseInt(this.data_nascimento.substring(0,2)) < 1 || 
-                   Integer.parseInt(this.data_nascimento.substring(0,2)) > 31)
+                if(Integer.parseInt(this.data.substring(0,2)) < 1 || 
+                   Integer.parseInt(this.data.substring(0,2)) > 31 ||
+                   Integer.parseInt(this.data.substring(3,5)) < 1 || 
+                   Integer.parseInt(this.data.substring(3,5)) > 12 ||
+                   Integer.parseInt(this.data.substring(6,10)) > 2019 || 
+                   Integer.parseInt(this.data.substring(6,10)) < 1910     
+                   )
                 {
                     System.out.println("Invalido, tente novamente");
-                    this.set_data_nascimento();
+                    this.set_data(frase);
                 }
                 else
                 {
-                    if(Integer.parseInt(this.data_nascimento.substring(3,5)) < 1 || 
-                       Integer.parseInt(this.data_nascimento.substring(3,5)) > 12) 
+                    if(Integer.parseInt(this.data.substring(3,5)) < 1 || 
+                       Integer.parseInt(this.data.substring(3,5)) > 12) 
                     { 
                         System.out.println("Invalido, tente novamente");
-                        this.set_data_nascimento(); 
+                        this.set_data(frase); 
                     }
                     else
                     {
-                        if(this.data_nascimento.substring(2,3).equals("/")
-                                && this.data_nascimento.substring(5,6).equals("/"))
+                        if(this.data.substring(2,3).equals("/")
+                                && this.data.substring(5,6).equals("/"))
                         {
                             ;
                         }
                         else
                         {   
                             System.out.println("Invalido, tente novamente");
-                            this.set_data_nascimento();
+                            this.set_data(frase);
                         }
                     }
                 }
@@ -144,179 +136,11 @@ public class Aluno
         catch(Exception e)
         {
             System.out.println("Invalido, tente novamente");
-            this.set_data_nascimento();
+            this.set_data(frase);
         }
-        return(this.data_nascimento);
-    }
-        
-    protected String set_data_emprestimo()
-    {
-        //ler_teclado.nextLine();
-        System.out.println("Digite a data de emprestimo no formato: dd/MM/yyyy ");
-        try
-        {   
-            if(this.chave_1 < 0)
-            {
-                ler_teclado.nextLine();
-                this.chave_1 = 1;
-            }
-            this.data_emprestimo = ler_teclado.nextLine();
-            if(this.data_emprestimo.length() != 10)
-            {
-                System.out.println("Invalido, tente novamente");
-                this.set_data_emprestimo();
-            }
-            else
-            {
-                if(Integer.parseInt(this.data_emprestimo.substring(0,2)) < 1 || 
-                   Integer.parseInt(this.data_emprestimo.substring(0,2)) > 31)
-                {
-                    System.out.println("Invalido, tente novamente");
-                    this.set_data_emprestimo();
-                }
-                else
-                {
-                    if(Integer.parseInt(this.data_emprestimo.substring(3,5)) < 1 || 
-                       Integer.parseInt(this.data_emprestimo.substring(3,5)) > 12) 
-                    { 
-                        System.out.println("Invalido, tente novamente");
-                        this.set_data_emprestimo(); 
-                    }
-                    else
-                    {
-                        if(this.data_emprestimo.substring(2,3).equals("/")
-                                && this.data_emprestimo.substring(5,6).equals("/"))
-                        {
-                            ;
-                        }
-                        else
-                        {   
-                            System.out.println("Invalido, tente novamente");
-                            this.set_data_emprestimo();
-                        }
-                    }
-                }
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println("Invalido, tente novamente");
-            this.set_data_emprestimo();
-        }
-        return(this.data_emprestimo);
+        return(this.data);
     }
     
-    protected String set_data_devolucao()
-    {
-        //ler_teclado.nextLine();
-        System.out.println("Digite a data de devolucao no formato: dd/MM/yyyy ");
-        try
-        {   
-            if(this.chave_2 < 0)
-            {
-                ler_teclado.nextLine();
-                this.chave_2 = 1;
-            }
-            this.data_devolucao = ler_teclado.nextLine();
-            if(this.data_devolucao.length() != 10)
-            {
-                System.out.println("Invalido, tente novamente");
-                this.set_data_devolucao();
-            }
-            else
-            {
-                if(Integer.parseInt(this.data_devolucao.substring(0,2)) < 1 || 
-                   Integer.parseInt(this.data_devolucao.substring(0,2)) > 31)
-                {
-                    System.out.println("Invalido, tente novamente");
-                    this.set_data_devolucao();
-                }
-                else
-                {
-                    if(Integer.parseInt(this.data_devolucao.substring(3,5)) < 1 || 
-                       Integer.parseInt(this.data_devolucao.substring(3,5)) > 12) 
-                    { 
-                        System.out.println("Invalido, tente novamente");
-                        this.set_data_devolucao(); 
-                    }
-                    else
-                    {
-                        if(this.data_devolucao.substring(2,3).equals("/")
-                                && this.data_devolucao.substring(5,6).equals("/"))
-                        {
-                            ;
-                        }
-                        else
-                        {   
-                            System.out.println("Invalido, tente novamente");
-                            this.set_data_devolucao();
-                        }
-                    }
-                }
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println("Invalido, tente novamente");
-            this.set_data_devolucao();
-        }
-        return(this.data_devolucao);
-    }
-    protected String set_data_atual()
-    {
-        System.out.println("Digite a data atual no formato: dd/MM/yyyy ");
-        try
-        {   
-            //if(this.chave_3 < 0)
-            //{
-            //    ler_teclado.nextLine();
-            //    this.chave_3 = 1;
-            //}
-            this.data_atual = ler_teclado.nextLine();
-            if(this.data_atual.length() != 10)
-            {
-                System.out.println("Invalido, tente novamente");
-                this.set_data_atual();
-            }
-            else
-            {
-                if(Integer.parseInt(this.data_atual.substring(0,2)) < 1 || 
-                   Integer.parseInt(this.data_atual.substring(0,2)) > 31)
-                {
-                    System.out.println("Invalido, tente novamente");
-                    this.set_data_atual();
-                }
-                else
-                {
-                    if(Integer.parseInt(this.data_atual.substring(3,5)) < 1 || 
-                       Integer.parseInt(this.data_atual.substring(3,5)) > 12) 
-                    { 
-                        System.out.println("Invalido, tente novamente");
-                        this.set_data_atual(); 
-                    }
-                    else
-                    {
-                        if(this.data_atual.substring(2,3).equals("/")
-                                && this.data_atual.substring(5,6).equals("/"))
-                        {
-                            ;
-                        }
-                        else
-                        {   
-                            System.out.println("Invalido, tente novamente");
-                            this.set_data_atual();
-                        }
-                    }
-                }
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println("Invalido, tente novamente");
-            this.set_data_atual();
-        }
-        return(this.data_atual);
-    }
     protected String set_name_street() 
     {
         System.out.println("Digite o Nome da Rua: ");
@@ -355,11 +179,7 @@ public class Aluno
     {
         ler_teclado.nextLine();
         System.out.println("Digite a Cidade: ");
-        if(this.chave < 0)
-        {
-            ler_teclado.nextLine();
-            this.chave = 1;
-        }
+
         this.cidade = ler_teclado.nextLine();
         if(this.cidade.length() <= 0 || this.cidade.length() >= 40)
         {
