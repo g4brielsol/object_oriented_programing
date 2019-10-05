@@ -84,8 +84,8 @@ public class Aula_pratica_1
         
     protected int fechar_programa()
     {
-        System.out.print("Deseja fechar o programa? digite 1 se sim,\n"
-                + "Senao tecle 0 para fazer outra operacao\n");
+        System.out.print("Digite 0 para fazer outra operacao,\n"
+                + "Digite 1 para fechar o programa\n");
         try
         {
             String ler = ler_teclado.nextLine();
@@ -353,10 +353,6 @@ public class Aula_pratica_1
             decisao = comeco.fechar_programa();
             if(decisao == 1)
             {
-                for(int i=0; i < array_nome.size(); i++)
-                {
-                    System.out.println(array_nome.get(i));
-                }
                 System.out.println("Fim do Programa!\n");
             }
         }

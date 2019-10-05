@@ -66,8 +66,6 @@ public class Midia {
         {
             for(i = 0; i < array_1.size(); i++)
             {
-                //System.out.println("autor" + array.get(i));
-                //System.out.println("contem string " + array.get(i).contains(digito_usuario));
                 if(array_1.get(i).toLowerCase().contains(digito_usuario.toLowerCase()))
                 {
                     return(i);
@@ -78,7 +76,7 @@ public class Midia {
     }
     protected int devolver(String frase_1, String frase_2)
     {
-        System.out.print(frase_1
+        System.out.println(frase_1
                 + frase_2);
         try
         {
