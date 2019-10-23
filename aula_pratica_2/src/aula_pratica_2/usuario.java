@@ -20,7 +20,7 @@ public class usuario
     {
         this.nome = novo_nome;
     }
-        // pegar nome
+    // pegar nome
     public String getNome()
     {
         return (this.nome);

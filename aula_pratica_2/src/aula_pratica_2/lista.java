@@ -25,6 +25,7 @@ public class lista extends imprimivel
     public void remover(usuario nome)
     {
         int i, removido = 0;
+        // procura pelo nome do usuario, se for encontrado, remove da lista
         for(i = 0; i < lista.size(); i++)
         {
             if(lista.get(i).getNome().compareTo(nome.getNome()) == 0)
@@ -33,6 +34,7 @@ public class lista extends imprimivel
                 removido = 1;
             }
         }
+        // se o usuario nao for encontrado
         if(removido == 0)
         {
             System.out.println("Nome nao foi encontrado!");
