@@ -121,18 +121,28 @@ public class Trab_interface extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+    private int counter = 5;
     private void undoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoActionPerformed
         if(fazer_refazer.canUndo())
         {
-            fazer_refazer.undo();
+            while(counter != 0)
+            {
+                fazer_refazer.undo();
+                counter -=1;
+            }
+            counter = 5;
         }
     }//GEN-LAST:event_undoActionPerformed
 
     private void redoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redoActionPerformed
         if(fazer_refazer.canRedo())
         {
-            fazer_refazer.redo();
+            while(counter != 0)
+            {
+                fazer_refazer.redo();
+                counter -=1;
+            }
+            counter = 5;
         }
     }//GEN-LAST:event_redoActionPerformed
 
@@ -194,16 +204,6 @@ public class Trab_interface extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Trab_interface().setVisible(true);
-                        text_area.getDocument().addUndoableEditListener
-        (
-           new UndoableEditListener()
-           {
-                public void undoableEditHappened(UndoableEditEvent e)
-                {
-                    fazer_refazer.addEdit(e.getEdit());
-                }
-            }
-        );
             }
         });
     }
@@ -215,7 +215,7 @@ public class Trab_interface extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton recortar;
     private javax.swing.JButton redo;
-    private static javax.swing.JTextArea text_area;
+    protected static javax.swing.JTextArea text_area;
     protected javax.swing.JButton undo;
     // End of variables declaration//GEN-END:variables
 
