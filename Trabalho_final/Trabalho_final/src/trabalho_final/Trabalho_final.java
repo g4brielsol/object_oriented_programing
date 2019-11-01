@@ -1,6 +1,8 @@
 package trabalho_final;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.event.UndoableEditEvent;
 import javax.swing.event.UndoableEditListener;
@@ -14,9 +16,11 @@ public class Trabalho_final
     public static void main(String[] args)
     {
         Trab_interface interface_grafica = new Trab_interface();
+        // pega o tamanho da tela do monitor do usuario
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         interface_grafica.setBounds(0, 0, 700, 500);
-        //interface_grafica.setLayout(new BorderLayout());
-        //interface_grafica.add(, BorderLayout.CENTER);
+        // faz a janela do docs ser inicializada no centro da tela do usuario
+        interface_grafica.setLocation(dim.width/2-interface_grafica.getSize().width/2, dim.height/2-interface_grafica.getSize().height/2);
         
         interface_grafica.setTitle("Docs");
         interface_grafica.setVisible(true);
