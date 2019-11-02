@@ -1,0 +1,14 @@
+Para rodar o programa, abra o projeto no NetBeans e rode o arquivo Trabalho_final.java
+
+localização: Trabalho_final/src/trabalho_final/Trabalho_final.java
+
+Botões e suas funções:
+    Copiar - copia o texto selecionado
+    Colar - cola o texto selecionado ou recortado
+    Recortar - copia o texto selecionado e o retira da frase
+    Desfazer - desfaz ações feitas pelo usuario
+    Refazer - refaz ações feitas pelo usuario
+    Salvar - salva o texto escrito pelo usuário em .txt em uma pasta escolida pelo usuário
+
+
+Tive dificuldades para implementar o servidor com as threads de salvamento simulando os clientes, então deixei para fazer melhor na parte 3.
